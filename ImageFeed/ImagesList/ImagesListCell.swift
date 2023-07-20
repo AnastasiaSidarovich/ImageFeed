@@ -2,8 +2,7 @@ import UIKit
 
 final class ImagesListCell: UITableViewCell {
     static let reuseIdentifier = "ImagesListCell"
-    let gradient = CAGradientLayer()
-    let black = UIColor(named: "ypBlack")
+    private let gradient = CAGradientLayer()
    
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
