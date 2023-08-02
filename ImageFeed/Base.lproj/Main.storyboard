@@ -211,10 +211,10 @@
                                     </imageView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="8fi-4G-yMt" secondAttribute="bottom" id="8go-pV-y5v"/>
-                                    <constraint firstItem="8fi-4G-yMt" firstAttribute="leading" secondItem="Cs0-BC-XWG" secondAttribute="leading" id="YSW-1W-bau"/>
-                                    <constraint firstAttribute="trailing" secondItem="8fi-4G-yMt" secondAttribute="trailing" id="cgR-mo-L56"/>
-                                    <constraint firstItem="8fi-4G-yMt" firstAttribute="top" secondItem="Cs0-BC-XWG" secondAttribute="top" id="xzX-RB-AHP"/>
+                                    <constraint firstItem="8fi-4G-yMt" firstAttribute="top" secondItem="Cs0-BC-XWG" secondAttribute="top" id="0OH-pv-pSj"/>
+                                    <constraint firstAttribute="trailing" secondItem="8fi-4G-yMt" secondAttribute="trailing" id="Nyh-eo-Bgn"/>
+                                    <constraint firstAttribute="bottom" secondItem="8fi-4G-yMt" secondAttribute="bottom" id="pSw-yW-bUb"/>
+                                    <constraint firstItem="8fi-4G-yMt" firstAttribute="leading" secondItem="Cs0-BC-XWG" secondAttribute="leading" id="rUo-6B-MOw"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="xa5-rY-9dg"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="SgI-xk-HqB"/>
@@ -246,14 +246,14 @@
                         <viewLayoutGuide key="safeArea" id="2g6-Y0-KZl"/>
                         <color key="backgroundColor" name="ypBlack"/>
                         <constraints>
-                            <constraint firstItem="Cs0-BC-XWG" firstAttribute="centerX" secondItem="pgo-Tk-bf7" secondAttribute="centerX" id="8LR-ev-i6v"/>
+                            <constraint firstItem="Cs0-BC-XWG" firstAttribute="leading" secondItem="2g6-Y0-KZl" secondAttribute="leading" id="NU5-gb-VZR"/>
                             <constraint firstItem="Eer-iR-jvm" firstAttribute="centerX" secondItem="2g6-Y0-KZl" secondAttribute="centerX" id="Qsz-u4-mvA"/>
-                            <constraint firstItem="Cs0-BC-XWG" firstAttribute="top" secondItem="Xam-5o-YNr" secondAttribute="top" id="Tac-0I-yE8"/>
+                            <constraint firstItem="Cs0-BC-XWG" firstAttribute="top" secondItem="pgo-Tk-bf7" secondAttribute="top" id="Vpm-O4-ciy"/>
                             <constraint firstItem="Xam-5o-YNr" firstAttribute="top" secondItem="2g6-Y0-KZl" secondAttribute="top" id="d4X-gZ-Dqd"/>
-                            <constraint firstItem="Cs0-BC-XWG" firstAttribute="bottom" secondItem="2g6-Y0-KZl" secondAttribute="bottom" id="enl-E9-164"/>
+                            <constraint firstItem="Cs0-BC-XWG" firstAttribute="bottom" secondItem="pgo-Tk-bf7" secondAttribute="bottom" id="enl-E9-164"/>
+                            <constraint firstItem="Cs0-BC-XWG" firstAttribute="trailing" secondItem="2g6-Y0-KZl" secondAttribute="trailing" id="fm4-ej-BVf"/>
                             <constraint firstItem="Xam-5o-YNr" firstAttribute="leading" secondItem="2g6-Y0-KZl" secondAttribute="leading" id="hfe-zd-OZ0"/>
-                            <constraint firstItem="Cs0-BC-XWG" firstAttribute="leading" secondItem="Xam-5o-YNr" secondAttribute="leading" id="hiv-7t-mvK"/>
-                            <constraint firstItem="2g6-Y0-KZl" firstAttribute="bottom" secondItem="Eer-iR-jvm" secondAttribute="bottom" constant="36" id="lnf-7J-mhR"/>
+                            <constraint firstItem="Eer-iR-jvm" firstAttribute="bottom" secondItem="2g6-Y0-KZl" secondAttribute="bottom" constant="-36" id="lnf-7J-mhR"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ptl-fP-FdE"/>
