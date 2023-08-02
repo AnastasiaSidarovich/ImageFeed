@@ -7,9 +7,6 @@ final class ProfileViewController: UIViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var logoutButton: UIButton!
     
-    @IBAction func didTapLogoutButton() {
-    }
-    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
