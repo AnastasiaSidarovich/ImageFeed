@@ -13,7 +13,10 @@
 		12341E7F2A0D2B020022FA2D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12341E7D2A0D2B020022FA2D /* Main.storyboard */; };
 		12341E812A0D2B040022FA2D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12341E802A0D2B040022FA2D /* Assets.xcassets */; };
 		12341E842A0D2B040022FA2D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12341E822A0D2B040022FA2D /* LaunchScreen.storyboard */; };
+		125960A22A697A93003F75C4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125960A12A697A93003F75C4 /* ProfileViewController.swift */; };
+		125960A52A7066E5003F75C4 /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125960A42A7066E5003F75C4 /* SingleImageViewController.swift */; };
 		1291E0CA2A66E68700988A95 /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1291E0C92A66E68700988A95 /* ImagesListCell.swift */; };
+		12E382392A72D99E005D4F87 /* ImageNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E382382A72D99E005D4F87 /* ImageNavigationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +28,10 @@
 		12341E802A0D2B040022FA2D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		12341E832A0D2B040022FA2D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		12341E852A0D2B040022FA2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		125960A12A697A93003F75C4 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		125960A42A7066E5003F75C4 /* SingleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
 		1291E0C92A66E68700988A95 /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
+		12E382382A72D99E005D4F87 /* ImageNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNavigationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,12 +67,31 @@
 				12341E772A0D2B020022FA2D /* AppDelegate.swift */,
 				12341E792A0D2B020022FA2D /* SceneDelegate.swift */,
 				1291E0CB2A66E6DD00988A95 /* ImagesList */,
+				125960A32A697AB8003F75C4 /* Profile */,
+				125960A62A707014003F75C4 /* SingleImage */,
 				12341E7D2A0D2B020022FA2D /* Main.storyboard */,
 				12341E802A0D2B040022FA2D /* Assets.xcassets */,
 				12341E822A0D2B040022FA2D /* LaunchScreen.storyboard */,
 				12341E852A0D2B040022FA2D /* Info.plist */,
 			);
 			path = ImageFeed;
+			sourceTree = "<group>";
+		};
+		125960A32A697AB8003F75C4 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				125960A12A697A93003F75C4 /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		125960A62A707014003F75C4 /* SingleImage */ = {
+			isa = PBXGroup;
+			children = (
+				12E382382A72D99E005D4F87 /* ImageNavigationController.swift */,
+				125960A42A7066E5003F75C4 /* SingleImageViewController.swift */,
+			);
+			name = SingleImage;
 			sourceTree = "<group>";
 		};
 		1291E0CB2A66E6DD00988A95 /* ImagesList */ = {
@@ -151,7 +176,10 @@
 			files = (
 				12341E7C2A0D2B020022FA2D /* ImagesListViewController.swift in Sources */,
 				1291E0CA2A66E68700988A95 /* ImagesListCell.swift in Sources */,
+				125960A22A697A93003F75C4 /* ProfileViewController.swift in Sources */,
 				12341E782A0D2B020022FA2D /* AppDelegate.swift in Sources */,
+				125960A52A7066E5003F75C4 /* SingleImageViewController.swift in Sources */,
+				12E382392A72D99E005D4F87 /* ImageNavigationController.swift in Sources */,
 				12341E7A2A0D2B020022FA2D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
