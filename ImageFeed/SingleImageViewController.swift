@@ -1,8 +1,11 @@
 import UIKit
 
 final class SingleImageViewController: UIViewController {
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var scrollView: UIScrollView!
+    
+    // MARK: - IBOutlet
+    
+    @IBOutlet private weak var imageView: UIImageView!
+    @IBOutlet private weak var scrollView: UIScrollView!
     
     var image: UIImage! {
         didSet {
@@ -11,6 +14,8 @@ final class SingleImageViewController: UIViewController {
             rescaleAndCenterImageInScrollView(image: image)
         }
     }
+    
+    // MARK: - Override Methods
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -31,6 +36,8 @@ final class SingleImageViewController: UIViewController {
         
         centerImageAfterZooming()
     }
+    
+    // MARK: - Private Methods
     
     private func rescaleAndCenterImageInScrollView(image: UIImage) {
         let minZoomScale = scrollView.minimumZoomScale
@@ -56,7 +63,9 @@ final class SingleImageViewController: UIViewController {
         scrollView.contentInset = .init(top: halfHight, left: halfWidth, bottom: 0, right: 0)
     }
     
-    @IBAction func didTapShareButton() {
+    // MARK: - IBAction
+    
+    @IBAction private func didTapShareButton() {
         guard let image = imageView.image else {
            return
         }
@@ -64,10 +73,12 @@ final class SingleImageViewController: UIViewController {
         present(share, animated: true, completion: nil)
     }
     
-    @IBAction func didTapBackButton() {
+    @IBAction private func didTapBackButton() {
         dismiss(animated: true, completion: nil)
     }
 }
+
+// MARK: - UIScrollViewDelegate
 
 extension SingleImageViewController: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {

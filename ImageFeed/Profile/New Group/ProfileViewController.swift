@@ -2,6 +2,8 @@ import UIKit
 
 final class ProfileViewController: UIViewController {
     
+    // MARK: - Override Methods
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -40,6 +42,8 @@ final class ProfileViewController: UIViewController {
             logoutButton.leadingAnchor.constraint(greaterThanOrEqualTo: profileImageView.trailingAnchor)
             ])
     }
+    
+    // MARK: - Private Methods
     
     private func addImageView() -> UIImageView {
         let avatarImage = UIImage(named: "avatar")

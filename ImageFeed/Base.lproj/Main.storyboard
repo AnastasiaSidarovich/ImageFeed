@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qbJ-K3-aaq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hWV-qF-fKC">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -9,10 +9,45 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Auth View Controller-->
+        <scene sceneID="h5d-m3-jOE">
+            <objects>
+                <viewController storyboardIdentifier="AuthViewController" id="1Dy-6T-u1f" customClass="AuthViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lsv-eZ-tfl">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="4Fz-bm-41U"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="aeh-jq-AuK"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="414" height="896"/>
+                    <connections>
+                        <segue destination="Psj-Tp-yzg" kind="presentation" identifier="showWebView" modalPresentationStyle="overFullScreen" modalTransitionStyle="coverVertical" id="aYx-FI-Ojb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ACG-3P-x74" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="715" y="-892"/>
+        </scene>
+        <!--Web View View Controller-->
+        <scene sceneID="uNe-32-pth">
+            <objects>
+                <viewController id="Psj-Tp-yzg" customClass="WebViewViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="l65-YK-HPV">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="SHU-Wc-4X1"/>
+                    </view>
+                    <size key="freeformSize" width="414" height="896"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yu8-jE-POc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1689" y="-892"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="SbO-mX-WbU">
             <objects>
-                <tabBarController id="qbJ-K3-aaq" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarViewController" id="qbJ-K3-aaq" sceneMemberID="viewController">
                     <size key="freeformSize" width="414" height="896"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kkJ-fa-OMx">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
@@ -30,7 +65,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x81-gy-TlS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1156" y="361"/>
+            <point key="canvasLocation" x="-230.53435114503816" y="360.56338028169017"/>
         </scene>
         <!--Profile-->
         <scene sceneID="06W-Sn-WLA">
@@ -46,7 +81,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ix2-2U-Fti" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="47" y="735"/>
+            <point key="canvasLocation" x="972.51908396946556" y="734.50704225352115"/>
         </scene>
         <!--ImageList-->
         <scene sceneID="tne-QT-ifu">
@@ -134,7 +169,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1003.0534351145038" y="-2.1126760563380285"/>
+            <point key="canvasLocation" x="1929.7709923664122" y="-2.1126760563380285"/>
         </scene>
         <!--Single Image View Controller-->
         <scene sceneID="9nN-vj-dpA">
@@ -206,7 +241,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ila-7b-jGC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1949.6183206106869" y="-2.1126760563380285"/>
+            <point key="canvasLocation" x="2876.3358778625952" y="-2.1126760563380285"/>
         </scene>
         <!--Image Navigation Controller-->
         <scene sceneID="it2-oO-hoH">
@@ -226,7 +261,45 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TNo-9v-EPg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="47.328244274809158" y="-2.1126760563380285"/>
+            <point key="canvasLocation" x="974.04580152671747" y="-2.1126760563380285"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="zSj-Br-phM">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="LUV-1E-L3Y" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <size key="freeformSize" width="414" height="896"/>
+                    <navigationBar key="navigationBar" hidden="YES" contentMode="scaleToFill" id="vr0-0l-S02">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <navigationBarAppearance key="standardAppearance"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="1Dy-6T-u1f" kind="relationship" relationship="rootViewController" id="ANd-qt-y4o"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kMy-Fd-fyX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-231" y="-892"/>
+        </scene>
+        <!--Unsplash-->
+        <scene sceneID="JUb-Zv-RnF">
+            <objects>
+                <viewController id="hWV-qF-fKC" customClass="SplashViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2it-La-kuK">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="0br-F9-fwz"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Unsplash" id="EkC-BY-Mq2"/>
+                    <size key="freeformSize" width="414" height="896"/>
+                    <connections>
+                        <segue destination="LUV-1E-L3Y" kind="presentation" identifier="showAuthenticationScreen" modalPresentationStyle="fullScreen" id="14L-JZ-PzP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HPR-cN-PUi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1939" y="-245"/>
         </scene>
     </scenes>
     <resources>
