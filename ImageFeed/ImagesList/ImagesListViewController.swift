@@ -1,10 +1,17 @@
 import UIKit
 
 class ImagesListViewController: UIViewController {
+    
+    // MARK: - IBOutlet
+    
     @IBOutlet private var tableView: UITableView!
+    
+    // MARK: - Private Properties
     
     private let photosName: [String] = Array(0..<20).map{ "\($0)" }
     private let showSingleImageSegueIdentifier = "showSingleImage"
+    
+    // MARK: - Override Methods
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showSingleImageSegueIdentifier {
@@ -34,6 +41,8 @@ class ImagesListViewController: UIViewController {
         return formatter
     }()
 }
+
+// MARK: - UITableViewDataSource
 
 extension ImagesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -65,6 +74,8 @@ extension ImagesListViewController {
         cell.addGradient()
     }
 }
+
+// MARK: - UITableViewDelegate
 
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

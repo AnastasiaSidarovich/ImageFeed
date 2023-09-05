@@ -4,6 +4,8 @@ final class ImagesListCell: UITableViewCell {
     static let reuseIdentifier = "ImagesListCell"
     private let gradient = CAGradientLayer()
    
+    // MARK: - IBOutlet
+    
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var cellImage: UIImageView!
