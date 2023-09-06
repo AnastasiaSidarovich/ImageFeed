@@ -12,7 +12,7 @@ final class WebViewViewController: UIViewController {
         let progressView = UIProgressView()
         progressView.translatesAutoresizingMaskIntoConstraints = false
         progressView.progressViewStyle = .bar
-        progressView.progressTintColor = UIColor(named: "ypBlack")
+        progressView.progressTintColor = .ypBlack
         
         return progressView
     }()
@@ -20,7 +20,7 @@ final class WebViewViewController: UIViewController {
     private let webView: WKWebView = {
         let webView = WKWebView()
         webView.translatesAutoresizingMaskIntoConstraints = false
-        webView.backgroundColor = UIColor(named: "ypWhite")
+        webView.backgroundColor = .ypWhite
         
         return webView
     }()
@@ -31,7 +31,7 @@ final class WebViewViewController: UIViewController {
         }
         
         let backButton = UIButton.systemButton(with: imageButton, target: self, action: #selector(Self.didTapBackButton))
-        backButton.tintColor = UIColor(named: "ypBlack")
+        backButton.tintColor = .ypBlack
         backButton.translatesAutoresizingMaskIntoConstraints = false
         
         return backButton
@@ -77,10 +77,10 @@ final class WebViewViewController: UIViewController {
 
         var urlComponents = URLComponents(string: UnsplashAuthorizeURLString)!
         urlComponents.queryItems = [
-            URLQueryItem(name: "client_id", value: accessKey),
-            URLQueryItem(name: "redirect_uri", value: redirectURI),
+            URLQueryItem(name: "client_id", value: Constants.accessKey),
+            URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
             URLQueryItem(name: "response_type", value: "code"),
-            URLQueryItem(name: "scope", value: accessScope)
+            URLQueryItem(name: "scope", value: Constants.accessScope)
             ]
         let url = urlComponents.url!
         

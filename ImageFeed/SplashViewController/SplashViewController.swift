@@ -25,7 +25,7 @@ final class SplashViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "ypBlack")
+        view.backgroundColor = .ypBlack
         addSubViews()
         applyConstraints()
     }

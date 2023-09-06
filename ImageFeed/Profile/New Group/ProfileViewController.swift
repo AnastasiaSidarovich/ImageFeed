@@ -10,26 +10,22 @@ final class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let whiteColor = getColorFromAssets(named: "ypWhite")
-        let grayColor = getColorFromAssets(named: "ypGray")
-        let blackColor = getColorFromAssets(named: "ypBlack")
         
-        view.backgroundColor = blackColor
+        view.backgroundColor = .ypBlack
         
         let profileImageView = addImageView()
         let nameLabel = addLabel(text: "Екатерина Новикова",
                                  textSize: 23,
                                  textStyle: .bold,
-                                 textColor: whiteColor)
+                                 textColor: .ypWhite ?? .white)
         let loginNameLabel = addLabel(text: "@ekaterina_nov",
                                       textSize: 13,
                                       textStyle: .regular,
-                                      textColor: grayColor)
+                                      textColor: .ypGray ?? .gray)
         let descriptionLabel = addLabel(text: "Hello, world!",
                                         textSize: 13,
                                         textStyle: .regular,
-                                        textColor: whiteColor)
+                                        textColor: .ypWhite ?? .white)
         let logoutButton = addButton()
         
         NSLayoutConstraint.activate([
@@ -80,7 +76,7 @@ final class ProfileViewController: UIViewController {
             fatalError("Картинка не найдена!")
         }
         let button = UIButton.systemButton(with: imageButton, target: self, action: #selector(Self.didTapButton))
-        button.tintColor = UIColor(named: "ypRed")
+        button.tintColor = .ypRed
         
         button.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(button)
@@ -97,13 +93,4 @@ final class ProfileViewController: UIViewController {
         private func didTapButton() {
             
         }
-}
-
-extension ProfileViewController {
-    func getColorFromAssets(named name: String) -> UIColor {
-        guard let color = UIColor(named: name) else {
-            fatalError("Цвет с названием '\(name)' не найден!")
-        }
-        return color
-    }
 }
