@@ -7,6 +7,7 @@ final class WebViewViewController: UIViewController {
     weak var delegate: WebViewViewControllerDelegate?
     
     // MARK: - Private Properties
+    private var estimatedProgressObservation: NSKeyValueObservation?
     
     private let progressView: UIProgressView = {
         let progressView = UIProgressView()
@@ -43,7 +44,7 @@ final class WebViewViewController: UIViewController {
         .darkContent
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+        /* override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         webView.addObserver(
             self,
@@ -64,14 +65,14 @@ final class WebViewViewController: UIViewController {
         } else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
-    }
+    } */
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         addSubViews()
         applyConstraints()
-        updateProgress()
+        includeEstimatedProgressObservation()
         
         webView.navigationDelegate = self
 
@@ -94,6 +95,17 @@ final class WebViewViewController: UIViewController {
         private func didTapBackButton() {
             delegate?.webViewViewControllerDidCancel(self)
         }
+    
+    private func includeEstimatedProgressObservation() {
+        estimatedProgressObservation = webView.observe(
+            \.estimatedProgress,
+             options: [],
+             changeHandler: { [weak self] _, _ in
+                 guard let self = self else { return }
+                 self.updateProgress()
+             }
+        )
+    }
     
     private func updateProgress() {
             self.progressView.progress = Float(self.webView.estimatedProgress)
