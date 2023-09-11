@@ -145,12 +145,10 @@ final class ProfileViewController: UIViewController {
             let imageURL = URL(string: profileImageURL)
         else { return }
         
-        let processor = RoundCornerImageProcessor(cornerRadius: 61)
         imageView.kf.indicatorType = .activity
         imageView.kf.setImage(
             with: imageURL,
-            placeholder: UIImage(named: "placeholder"),
-            options: [.processor(processor)]
+            placeholder: UIImage(named: "placeholder")
         )
     }
 }

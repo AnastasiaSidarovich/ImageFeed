@@ -40,9 +40,9 @@ final class SplashViewController: UIViewController {
         alertPresenter = AlertPresenter(viewController: self)
         
         if let token = tokenStorege.token {
-            fetchProfile(token: token)
+            self.fetchProfile(token: token)
         } else {
-            performSegue(withIdentifier: showAuthenticationScreenSegueIdentifier, sender: nil)
+            switchToAuthViewController()
         }
     }
     
@@ -60,6 +60,19 @@ final class SplashViewController: UIViewController {
         let tabBarViewController = UIStoryboard(name: "Main", bundle: .main)
             .instantiateViewController(withIdentifier: "TabBarViewController")
         window.rootViewController = tabBarViewController
+    }
+    
+    private func switchToAuthViewController() {
+        guard let authViewController = UIStoryboard(
+            name: "Main",
+            bundle: .main
+        ).instantiateViewController(withIdentifier: "AuthViewController") as? AuthViewController else {
+            assertionFailure("Не удалось создать AuthViewController!")
+            return
+        }
+        authViewController.delegate = self
+        authViewController.modalPresentationStyle = .fullScreen
+        self.present(authViewController, animated: true)
     }
     
     private func showAlertNetworkError() {
@@ -83,20 +96,6 @@ final class SplashViewController: UIViewController {
             logo.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
             logo.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
         ])
-    }
-}
-
-extension SplashViewController {
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == showAuthenticationScreenSegueIdentifier {
-            guard
-                let navigationController = segue.destination as? UINavigationController,
-                let viewController = navigationController.viewControllers[0] as? AuthViewController
-            else { fatalError("Failed to prepare for \(showAuthenticationScreenSegueIdentifier)") }
-            viewController.delegate = self
-        } else {
-            super.prepare(for: segue, sender: sender)
-        }
     }
 }
 
