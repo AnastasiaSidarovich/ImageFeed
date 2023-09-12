@@ -1,6 +1,69 @@
 import UIKit
+import Kingfisher
 
 final class ProfileViewController: UIViewController {
+    
+    // MARK: - Private Properties
+    
+    private let profileService = ProfileService.shared
+    private var profileImageServiceObserver: NSObjectProtocol?
+    
+    private var imageView: UIImageView = {
+        let avatarImage = UIImage(named: "avatar")
+        var imageView = UIImageView(image: avatarImage)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        imageView.layer.cornerRadius = imageView.layer.frame.height / 2
+        imageView.layer.masksToBounds = true
+        
+        return imageView
+    }()
+    
+    private let nameLabel: UILabel = {
+        let nameLabel = UILabel()
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        nameLabel.text = "Екатерина Новикова"
+        nameLabel.font = UIFont.systemFont(ofSize: 23, weight: .bold)
+        nameLabel.textColor = .ypWhite
+        
+        return nameLabel
+    }()
+    
+    private let loginNameLabel: UILabel = {
+        let loginNameLabel = UILabel()
+        loginNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        loginNameLabel.text = "@ekaterina_nov"
+        loginNameLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        loginNameLabel.textColor = .ypGray
+        
+        return loginNameLabel
+    }()
+    
+    private let descriptionLabel: UILabel = {
+        let descriptionLabel = UILabel()
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        descriptionLabel.text = "Hello, world!"
+        descriptionLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        descriptionLabel.textColor = .ypWhite
+        
+        return descriptionLabel
+    }()
+    
+    private let logoutButton: UIButton = {
+        guard let imageButton = UIImage(named: "logout_button") else {
+            fatalError("Картинка не найдена!")
+        }
+        let logoutButton = UIButton.systemButton(with: imageButton, target: self, action: #selector(Self.didTapButton))
+        
+        logoutButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        logoutButton.tintColor = .ypRed
+        
+        return logoutButton
+    }()
     
     // MARK: - Override Methods
     
@@ -10,100 +73,82 @@ final class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let whiteColor = getColorFromAssets(named: "ypWhite")
-        let grayColor = getColorFromAssets(named: "ypGray")
-        let blackColor = getColorFromAssets(named: "ypBlack")
         
-        view.backgroundColor = blackColor
+        view.backgroundColor = .ypBlack
         
-        let profileImageView = addImageView()
-        let nameLabel = addLabel(text: "Екатерина Новикова",
-                                 textSize: 23,
-                                 textStyle: .bold,
-                                 textColor: whiteColor)
-        let loginNameLabel = addLabel(text: "@ekaterina_nov",
-                                      textSize: 13,
-                                      textStyle: .regular,
-                                      textColor: grayColor)
-        let descriptionLabel = addLabel(text: "Hello, world!",
-                                        textSize: 13,
-                                        textStyle: .regular,
-                                        textColor: whiteColor)
-        let logoutButton = addButton()
-        
-        NSLayoutConstraint.activate([
-            nameLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 8),
-            nameLabel.leadingAnchor.constraint(equalTo: profileImageView.leadingAnchor),
-            loginNameLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
-            loginNameLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
-            descriptionLabel.topAnchor.constraint(equalTo: loginNameLabel.bottomAnchor, constant: 8),
-            descriptionLabel.leadingAnchor.constraint(equalTo: loginNameLabel.leadingAnchor),
-            logoutButton.leadingAnchor.constraint(greaterThanOrEqualTo: profileImageView.trailingAnchor)
-            ])
+        addSubViews()
+        applyConstraints()
+        updateProfileDetails(profile: profileService.profile)
     }
     
     // MARK: - Private Methods
-    
-    private func addImageView() -> UIImageView {
-        let avatarImage = UIImage(named: "avatar")
-        let imageView = UIImageView(image: avatarImage)
-        
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(imageView)
-        
-        imageView.heightAnchor.constraint(equalToConstant: 70).isActive = true
-        imageView.widthAnchor.constraint(equalToConstant: 70).isActive = true
-        imageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
-        imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32).isActive = true
-        
-        return imageView
-    }
-    
-    private func addLabel(text: String, textSize: CGFloat, textStyle: UIFont.Weight, textColor: UIColor) -> UILabel {
-        let label = UILabel()
-        
-        label.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(label)
-        
-        label.text = text
-        label.font = UIFont.systemFont(ofSize: textSize, weight: textStyle)
-        label.textColor = textColor
-        
-        label.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 16).isActive = true
-        
-        return label
-    }
-    
-    private func addButton() -> UIButton {
-        guard let imageButton = UIImage(named: "logout_button") else {
-            fatalError("Картинка не найдена!")
-        }
-        let button = UIButton.systemButton(with: imageButton, target: self, action: #selector(Self.didTapButton))
-        button.tintColor = UIColor(named: "ypRed")
-        
-        button.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(button)
-        
-        button.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        button.widthAnchor.constraint(equalToConstant: 44).isActive = true
-        button.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
-        button.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 45).isActive = true
-        
-        return button
-    }
     
     @objc
         private func didTapButton() {
             
         }
-}
-
-extension ProfileViewController {
-    func getColorFromAssets(named name: String) -> UIColor {
-        guard let color = UIColor(named: name) else {
-            fatalError("Цвет с названием '\(name)' не найден!")
+    
+    private func addSubViews() {
+        view.addSubview(imageView)
+        view.addSubview(nameLabel)
+        view.addSubview(loginNameLabel)
+        view.addSubview(descriptionLabel)
+        view.addSubview(logoutButton)
+    }
+    
+    private func applyConstraints() {
+        NSLayoutConstraint.activate([
+            nameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8),
+            nameLabel.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
+            loginNameLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
+            loginNameLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
+            descriptionLabel.topAnchor.constraint(equalTo: loginNameLabel.bottomAnchor, constant: 8),
+            descriptionLabel.leadingAnchor.constraint(equalTo: loginNameLabel.leadingAnchor),
+            logoutButton.leadingAnchor.constraint(greaterThanOrEqualTo: imageView.trailingAnchor),
+            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
+            imageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            logoutButton.heightAnchor.constraint(equalToConstant: 44),
+            logoutButton.widthAnchor.constraint(equalToConstant: 44),
+            logoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            logoutButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 45),
+            nameLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 16),
+            loginNameLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 16),
+            descriptionLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 16),
+            imageView.heightAnchor.constraint(equalToConstant: 70),
+            imageView.widthAnchor.constraint(equalToConstant: 70),
+            imageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32)
+            ])
+    }
+    
+    private func updateProfileDetails(profile: Profile?) {
+        guard let profile = profile else { return }
+        
+        nameLabel.text = profile.name
+        loginNameLabel.text = profile.loginName
+        descriptionLabel.text = profile.bio
+        
+        profileImageServiceObserver = NotificationCenter.default.addObserver(
+            forName: ProfileImageService.didChangeNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            guard let self = self else { return }
+            self.updateAvatar()
         }
-        return color
+        updateAvatar()
+    }
+    
+    private func updateAvatar() {
+        guard
+            let profileImageURL = ProfileImageService.shared.avatarURL,
+            let imageURL = URL(string: profileImageURL)
+        else { return }
+        
+        imageView.kf.indicatorType = .activity
+        imageView.kf.setImage(
+            with: imageURL,
+            placeholder: UIImage(named: "placeholder")
+        )
     }
 }

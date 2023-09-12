@@ -50,14 +50,19 @@ final class OAuth2Service {
 
 extension OAuth2Service {
     func authTokenRequest(code: String) -> URLRequest {
-        URLRequest.makeHTTPRequest(
-            path: "/oauth/token"
-            + "?client_id=\(accessKey)"
-            + "&&client_secret=\(secretKey)"
-            + "&&redirect_uri=\(redirectURI)"
-            + "&&code=\(code)"
-            + "&&grant_type=authorization_code",
+        let queryItems = [
+            URLQueryItem(name: "client_id", value: Constants.accessKey),
+            URLQueryItem(name: "client_secret", value: Constants.secretKey),
+            URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
+            URLQueryItem(name: "code", value: code),
+            URLQueryItem(name: "grant_type", value: "authorization_code")
+        ]
+        
+        return URLRequest.makeHTTPRequest(
+            path: "/oauth/token",
             httpMethod: "POST",
-            baseURL: URL(string: "https://unsplash.com")!
-        ) }
+            baseURL: Constants.baseURL,
+            queryItems: queryItems
+        )
+    }
 }
