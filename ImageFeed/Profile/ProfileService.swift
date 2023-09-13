@@ -2,6 +2,7 @@ import Foundation
 
 final class ProfileService {
     static let shared = ProfileService()
+    private init() { }
     
     private(set) var profile: Profile?
     private var task: URLSessionTask?
@@ -41,7 +42,7 @@ final class ProfileService {
 }
 
 extension ProfileService {
-    var profileRequest: URLRequest {
+    var profileRequest: URLRequest? {
         URLRequest.makeHTTPRequest(
             path: "/me",
             httpMethod: "GET"
