@@ -26,7 +26,10 @@ final class OAuth2Service {
         task?.cancel()
         lastCode = code
         
-        let request = authTokenRequest(code: code)
+        guard let request = authTokenRequest(code: code) else {
+            assertionFailure("Невозможно сформировать запрос!")
+            return
+        }
 
         let task = urlSession.objectTask(for: request) {
             [weak self] (result: Result<OAuth2TokenResponseBody, Error>) in
@@ -49,7 +52,7 @@ final class OAuth2Service {
 }
 
 extension OAuth2Service {
-    func authTokenRequest(code: String) -> URLRequest {
+    func authTokenRequest(code: String) -> URLRequest? {
         let queryItems = [
             URLQueryItem(name: "client_id", value: Constants.accessKey),
             URLQueryItem(name: "client_secret", value: Constants.secretKey),

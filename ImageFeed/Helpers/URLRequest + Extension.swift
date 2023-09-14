@@ -5,7 +5,8 @@ extension URLRequest {
         path: String,
         httpMethod: String,
         baseURL: URL? = Constants.defaultBaseURL,
-        queryItems: [URLQueryItem]? = nil
+        queryItems: [URLQueryItem]? = nil,
+        token: String
     ) -> URLRequest? {
         var request: URLRequest
         
