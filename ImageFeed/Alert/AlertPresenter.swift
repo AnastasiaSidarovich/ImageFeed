@@ -14,6 +14,13 @@ class AlertPresenter: AlertPresenterProtocol {
             result.completion?()
         }
         alert.addAction(action)
+        
+        if let secondButtonText = result.secondButtonText {
+            let secondAction = UIAlertAction(title: result.secondButtonText, style: .default) { _ in
+                result.secondCompletion?()
+            }
+            alert.addAction(secondAction)
+        }
         viewController?.present(alert, animated: true, completion: nil)
     }
 }

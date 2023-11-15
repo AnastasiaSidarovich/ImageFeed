@@ -1,6 +1,6 @@
 import Foundation
 
-struct PhotoResult: Codable {
+struct PhotoResult: Decodable {
     let id: String
     let width: Int
     let height: Int
@@ -10,7 +10,7 @@ struct PhotoResult: Codable {
     let urls: UrlsResult?
 }
 
-struct UrlsResult: Codable {
+struct UrlsResult: Decodable {
     let raw: String?
     let full: String?
     let regular: String?
@@ -23,14 +23,14 @@ struct Photo {
     let size: CGSize
     let createdAt: Date?
     let welcomeDescription: String?
-    let thumbImageURL: String?
+    let regularImageURL: String?
     let largeImageURL: String?
-    let isLiked: Bool
+    var isLiked: Bool
     
     let dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        return formatter
+        let date = DateFormatter()
+        date.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        return date
     }()
     
     init(photoResult: PhotoResult) {
@@ -38,8 +38,12 @@ struct Photo {
         self.size = CGSize(width: photoResult.width, height: photoResult.height)
         self.createdAt = dateFormatter.date(from: photoResult.createdAt)
         self.welcomeDescription = photoResult.description
-        self.thumbImageURL = photoResult.urls?.thumb
+        self.regularImageURL = photoResult.urls?.small
         self.largeImageURL = photoResult.urls?.full
         self.isLiked = photoResult.likedByUser
     }
+}
+
+struct LikeResult: Decodable {
+    let photo: PhotoResult?
 }

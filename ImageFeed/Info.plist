@@ -11,14 +11,12 @@
 			<key>UIWindowSceneSessionRoleApplication</key>
 			<array>
 				<dict>
+					<key>CFBundleIdentifier</key>
+					<string>com.AnastasiaSidarovich.ImageFeed</string>
 					<key>UISceneConfigurationName</key>
 					<string>Default Configuration</string>
-                    <key>CFBundleIdentifier</key>
-                    <string>com.AnastasiaSidarovich.ImageFeed</string>
 					<key>UISceneDelegateClassName</key>
 					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
-					<key>UISceneStoryboardFile</key>
-					<string>Main</string>
 				</dict>
 			</array>
 		</dict>

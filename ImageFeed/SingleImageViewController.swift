@@ -7,13 +7,14 @@ final class SingleImageViewController: UIViewController {
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var scrollView: UIScrollView!
     
-    var image: UIImage! {
+    var fullImageURL: URL! {
         didSet {
             guard isViewLoaded else { return }
-            imageView.image = image
-            rescaleAndCenterImageInScrollView(image: image)
+            setImage()
         }
     }
+    
+    private var alertPresenter: AlertPresenterProtocol?
     
     // MARK: - Override Methods
     
@@ -26,9 +27,8 @@ final class SingleImageViewController: UIViewController {
         
         scrollView.minimumZoomScale = 0.1
         scrollView.maximumZoomScale = 1.25
-        
-        imageView.image = image
-        rescaleAndCenterImageInScrollView(image: image)
+        alertPresenter = AlertPresenter(viewController: self)
+        setImage() 
     }
     
     override func viewDidLayoutSubviews() {
@@ -63,6 +63,38 @@ final class SingleImageViewController: UIViewController {
         scrollView.contentInset = .init(top: halfHight, left: halfWidth, bottom: 0, right: 0)
     }
     
+    private func setImage() {
+        UIBlockingProgressHUD.show()
+        imageView.kf.setImage(with: fullImageURL) { [weak self] result in
+            UIBlockingProgressHUD.dismiss()
+            
+            guard let self else { return }
+            switch result {
+                case .success(let imageResult):
+                self.rescaleAndCenterImageInScrollView(image: imageResult.image)
+                case .failure:
+                self.showError()
+                }
+            }
+    }
+
+    private func showError() {
+        let alertModel = AlertModel(
+            title: "Что-то пошло не так(",
+            message: "Не удалось войти в систему",
+            buttonText: "ОК",
+            completion: { [weak self] in
+                guard let self = self else { return }
+                UIBlockingProgressHUD.show()
+                setImage()
+            },
+            secondButtonText: "Нет",
+            secondCompletion: { [weak self] in
+                guard let self = self else { return }
+                self.dismiss(animated: true)
+            })
+        alertPresenter?.presentAlert(alertModel)
+    }
     // MARK: - IBAction
     
     @IBAction private func didTapShareButton() {

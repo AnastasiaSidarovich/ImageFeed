@@ -1,4 +1,5 @@
 import Foundation
+import WebKit
 
 final class ProfileService {
     static let shared = ProfileService()
@@ -38,6 +39,10 @@ final class ProfileService {
         
         self.task = task
         task.resume()
+    }
+    
+    func clearProfile() {
+        profile = nil
     }
 }
 

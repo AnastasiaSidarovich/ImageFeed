@@ -5,7 +5,7 @@ final class OAuth2Service {
     // MARK: - Private Properties
     
     private let urlSession = URLSession.shared
-    private let tokenStorage = OAuth2TokenStorage()
+    private let tokenStorage = OAuth2TokenStorage.shared
     private var task: URLSessionTask?
     private var lastCode: String?
     

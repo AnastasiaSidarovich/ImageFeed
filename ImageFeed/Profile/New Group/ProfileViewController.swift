@@ -7,6 +7,8 @@ final class ProfileViewController: UIViewController {
     
     private let profileService = ProfileService.shared
     private var profileImageServiceObserver: NSObjectProtocol?
+    private let tokenStorage = OAuth2TokenStorage.shared
+    private var alertPresenter: AlertPresenterProtocol?
     
     private var imageView: UIImageView = {
         let avatarImage = UIImage(named: "avatar")
@@ -79,14 +81,42 @@ final class ProfileViewController: UIViewController {
         addSubViews()
         applyConstraints()
         updateProfileDetails(profile: profileService.profile)
+        alertPresenter = AlertPresenter(viewController: self)
     }
     
     // MARK: - Private Methods
     
     @objc
         private func didTapButton() {
-            
+            showAlert()
         }
+    
+    private func exitProfile() {
+        tokenStorage.token = nil
+        profileService.clearProfile()
+        WebViewViewController.clean()
+        guard let window = UIApplication.shared.windows.first else { assertionFailure("Invalid Configuration")
+            return
+        }
+        window.rootViewController = SplashViewController()
+    }
+    
+    private func showAlert() {
+        let alertModel = AlertModel(
+            title: "Пока, пока!",
+            message: "Уверены, что хотите выйти?",
+            buttonText: "Да",
+            completion: { [weak self] in
+                guard let self = self else { return }
+                self.exitProfile()
+            },
+            secondButtonText: "Нет",
+            secondCompletion: { [weak self] in
+                guard let self = self else { return }
+                self.dismiss(animated: true)
+            })
+        alertPresenter?.presentAlert(alertModel)
+    }
     
     private func addSubViews() {
         view.addSubview(imageView)

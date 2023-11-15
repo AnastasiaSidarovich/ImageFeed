@@ -8,9 +8,10 @@ final class SplashViewController: UIViewController {
     private let showAuthenticationScreenSegueIdentifier = "showAuthenticationScreen"
     
     private let oauth2Service = OAuth2Service()
-    private let tokenStorege = OAuth2TokenStorage()
+    private let tokenStorege = OAuth2TokenStorage.shared
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
+    private let imagesListService = ImagesListService.shared
     private var alertPresenter: AlertPresenterProtocol?
     
     private let logo: UIImageView = {
@@ -60,6 +61,10 @@ final class SplashViewController: UIViewController {
         let tabBarViewController = UIStoryboard(name: "Main", bundle: .main)
             .instantiateViewController(withIdentifier: "TabBarViewController")
         window.rootViewController = tabBarViewController
+        
+        if (tabBarViewController as? UITabBarController)?.viewControllers?.first is ImagesListViewController {
+            imagesListService.fetchPhotosNextPage()
+        }
     }
     
     private func switchToAuthViewController() {
@@ -80,7 +85,9 @@ final class SplashViewController: UIViewController {
             title: "Что-то пошло не так(",
             message: "Не удалось войти в систему",
             buttonText: "ОК",
-            completion: nil
+            completion: nil,
+            secondButtonText: nil,
+            secondCompletion: nil
         )
         alertPresenter?.presentAlert(alertModel)
     }
