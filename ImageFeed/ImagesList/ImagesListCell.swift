@@ -26,6 +26,7 @@ final class ImagesListCell: UITableViewCell {
     override func prepareForReuse(){
         super.prepareForReuse()
         cellImage.kf.cancelDownloadTask()
+        cellImage.contentMode = .center
     }
     
     @IBAction func likeAction() {

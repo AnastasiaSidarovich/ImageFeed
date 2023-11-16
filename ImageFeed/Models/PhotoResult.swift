@@ -29,7 +29,7 @@ struct Photo {
     
     let dateFormatter: DateFormatter = {
         let date = DateFormatter()
-        date.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        date.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         return date
     }()
     

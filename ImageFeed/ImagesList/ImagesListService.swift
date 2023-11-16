@@ -10,7 +10,8 @@ final class ImagesListService {
     
     private (set) var photos: [Photo] = []
     private var lastLoadedPage: Int?
-    private var isFetching: Bool = false
+    private var isFetching = false
+    private var isProcessingRequest = false
     private var task: URLSessionTask?
     private let urlSession = URLSession.shared
     private let tokenStorage = OAuth2TokenStorage.shared
@@ -64,6 +65,8 @@ final class ImagesListService {
     
     func changeLike(photoId: String, isLike: Bool, _ completion: @escaping (Result<Void, Error>) -> Void) {
         assert(Thread.isMainThread)
+        guard !isProcessingRequest else { return }
+        isProcessingRequest = true
 
         var request: URLRequest? = URLRequest.makeHTTPRequest(
             path: "/photos/\(photoId)/like",
@@ -81,6 +84,11 @@ final class ImagesListService {
 
         let task = urlSession.objectTask(for: request) { [weak self] (result: Result<LikeResult, Error>) in
             guard let self = self else { return }
+            
+            defer {
+                self.isProcessingRequest = false
+            }
+            
             DispatchQueue.main.async {
                 switch result {
                 case .success(let body):
@@ -107,7 +115,7 @@ extension ImagesListService {
     func imagesListRequest(page: Int) -> URLRequest? {
         let queryItems = [
             URLQueryItem(name: "page", value: "\(page)"),
-            URLQueryItem(name: "order_by", value: "popular"),
+            URLQueryItem(name: "order_by", value: "latest"),
         ]
         
         return URLRequest.makeHTTPRequest(

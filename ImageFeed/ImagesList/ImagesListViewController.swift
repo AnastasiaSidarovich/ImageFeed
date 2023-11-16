@@ -97,7 +97,7 @@ extension ImagesListViewController {
         cell.cellImage.kf.setImage(
             with: imageURL,
             placeholder: UIImage(named: "stub"),
-            options: [.transition(.fade(2))]
+            options: [.transition(.fade(1))]
         ) { [weak self] result in
             DispatchQueue.main.async { [self] in
                 guard let self = self else { return }
@@ -106,13 +106,13 @@ extension ImagesListViewController {
                     cell.cellImage.contentMode = .scaleToFill
                     cell.setIsLiked(self.photos[indexPath.row].isLiked)
                     
-                    if let data = self.photos[indexPath.row].createdAt {
-                        cell.dateLabel.text = self.dateFormatter.string(from: data)
+                    if let date = self.photos[indexPath.row].createdAt {
+                        cell.dateLabel.text = self.dateFormatter.string(from: date)
                     } else {
                         cell.dateLabel.text = ""
                     }
                 case .failure(let error):
-                    print("Error of loading image: \(error)")
+                    assertionFailure("\(error)")
                 }
             }
         }
@@ -141,11 +141,6 @@ extension ImagesListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        // if let visibleIndexPaths = tableView.indexPathsForVisibleRows,
-             //    visibleIndexPaths.contains(indexPath) {
-            //     guard indexPath.row + 1 == photos.count else { return }
-            //     imagesListService.fetchPhotosNextPage()
-            // }
         if indexPath.row + 1 == imagesListService.photos.count {
             imagesListService.fetchPhotosNextPage()
         }
