@@ -29,7 +29,7 @@ final class ImagesListCell: UITableViewCell {
         cellImage.contentMode = .center
     }
     
-    @IBAction func likeAction() {
+    @IBAction private func likeAction() {
         delegate?.imageListCellDidTapLike(self)
     }
 }

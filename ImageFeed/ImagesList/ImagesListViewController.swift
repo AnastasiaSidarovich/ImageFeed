@@ -67,7 +67,6 @@ class ImagesListViewController: UIViewController {
             } completion: { _ in }
         }
     }
-
 }
 
 // MARK: - UITableViewDataSource
