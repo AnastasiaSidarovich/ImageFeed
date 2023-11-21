@@ -30,11 +30,11 @@
       shouldAutocreateTestPlan = "YES">
       <Testables>
          <TestableReference
-            skipped = "YES"
+            skipped = "NO"
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "12839B142AA5D77700DCF7A8"
+               BlueprintIdentifier = "12839B5E2AB352F800DCF7A8"
                BuildableName = "ImageFeedTests.xctest"
                BlueprintName = "ImageFeedTests"
                ReferencedContainer = "container:ImageFeed.xcodeproj">
@@ -48,6 +48,17 @@
                BlueprintIdentifier = "12839B212AA5D79800DCF7A8"
                BuildableName = "OAuth2ServiceTests.xctest"
                BlueprintName = "OAuth2ServiceTests"
+               ReferencedContainer = "container:ImageFeed.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "YES"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "12839B6B2AB35E9B00DCF7A8"
+               BuildableName = "ImageFeedTest.xctest"
+               BlueprintName = "ImageFeedTest"
                ReferencedContainer = "container:ImageFeed.xcodeproj">
             </BuildableReference>
          </TestableReference>

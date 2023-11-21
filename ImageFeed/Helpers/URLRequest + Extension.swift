@@ -6,7 +6,7 @@ extension URLRequest {
         httpMethod: String,
         baseURL: URL? = Constants.defaultBaseURL,
         queryItems: [URLQueryItem]? = nil
-    ) -> URLRequest {
+    ) -> URLRequest? {
         var request: URLRequest
         
         if let baseURL = baseURL,
@@ -16,12 +16,14 @@ extension URLRequest {
             urlComponents.queryItems = queryItems
             
             guard let url = urlComponents.url else {
-                fatalError("Invalid URL components")
+                assertionFailure("Invalid URL components")
+                return nil
             }
             
             request = URLRequest(url: url)
         } else {
-            fatalError("Invalid baseURL or path")
+            assertionFailure("Invalid baseURL or path")
+            return nil
         }
         
         request.httpMethod = httpMethod

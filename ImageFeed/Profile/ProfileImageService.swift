@@ -2,6 +2,8 @@ import Foundation
 
 final class ProfileImageService {
     static let shared = ProfileImageService()
+    private init() { }
+    
     static let didChangeNotification = Notification.Name(rawValue: "ProfileImageProviderDidChange")
     
     private (set) var avatarURL: String?
@@ -47,7 +49,7 @@ final class ProfileImageService {
 }
 
 extension ProfileImageService {
-    func profileImageURLRequest(username: String) -> URLRequest {
+    func profileImageURLRequest(username: String) -> URLRequest? {
         URLRequest.makeHTTPRequest(
             path: "/users/\(username)",
             httpMethod: "GET"

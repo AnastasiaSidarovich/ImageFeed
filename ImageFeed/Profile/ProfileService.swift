@@ -1,7 +1,9 @@
 import Foundation
+import WebKit
 
 final class ProfileService {
     static let shared = ProfileService()
+    private init() { }
     
     private(set) var profile: Profile?
     private var task: URLSessionTask?
@@ -38,10 +40,14 @@ final class ProfileService {
         self.task = task
         task.resume()
     }
+    
+    func clearProfile() {
+        profile = nil
+    }
 }
 
 extension ProfileService {
-    var profileRequest: URLRequest {
+    var profileRequest: URLRequest? {
         URLRequest.makeHTTPRequest(
             path: "/me",
             httpMethod: "GET"
