@@ -1,7 +1,11 @@
 import Foundation
 
 final class OAuth2Service {
-    
+    let configuration: AuthConfiguration
+
+    init(configuration: AuthConfiguration = .standard) {
+        self.configuration = configuration
+    }
     // MARK: - Private Properties
     
     private let urlSession = URLSession.shared
@@ -54,9 +58,9 @@ final class OAuth2Service {
 extension OAuth2Service {
     func authTokenRequest(code: String) -> URLRequest? {
         let queryItems = [
-            URLQueryItem(name: "client_id", value: Constants.accessKey),
-            URLQueryItem(name: "client_secret", value: Constants.secretKey),
-            URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
+            URLQueryItem(name: "client_id", value: configuration.accessKey),
+            URLQueryItem(name: "client_secret", value: configuration.secretKey),
+            URLQueryItem(name: "redirect_uri", value: configuration.redirectURI),
             URLQueryItem(name: "code", value: code),
             URLQueryItem(name: "grant_type", value: "authorization_code")
         ]
@@ -64,7 +68,7 @@ extension OAuth2Service {
         return URLRequest.makeHTTPRequest(
             path: "/oauth/token",
             httpMethod: "POST",
-            baseURL: Constants.baseURL,
+            baseURL: configuration.baseURL,
             queryItems: queryItems
         )
     }

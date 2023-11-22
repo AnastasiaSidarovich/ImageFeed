@@ -19,6 +19,7 @@ final class AuthViewController: UIViewController {
         let button = UIButton(type: .system)
         button.addTarget(self, action: #selector(Self.didTapLoginButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.accessibilityIdentifier = "Authenticate"
         button.backgroundColor = .ypWhite
         button.layer.cornerRadius = 16
         
@@ -78,8 +79,12 @@ extension AuthViewController {
                 assertionFailure("Failed to prepare for \(showWebViewSegueIdentifier)")
                 return
             }
-            webViewViewController.modalPresentationCapturesStatusBarAppearance = true
+            let authHelper = AuthHelper()
+            let webViewPresenter = WebViewPresenter(authHelper: authHelper)
+            webViewViewController.presenter = webViewPresenter
+            webViewPresenter.view = webViewViewController
             webViewViewController.delegate = self
+            webViewViewController.modalPresentationCapturesStatusBarAppearance = true
             webViewViewController.modalPresentationStyle = .overFullScreen
         } else {
             super.prepare(for: segue, sender: sender)

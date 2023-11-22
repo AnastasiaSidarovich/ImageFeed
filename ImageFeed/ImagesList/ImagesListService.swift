@@ -16,7 +16,7 @@ final class ImagesListService {
     private let urlSession = URLSession.shared
     private let tokenStorage = OAuth2TokenStorage.shared
     
-    // MARK: - Methods
+    // MARK: - Public Methods
     
     func fetchPhotosNextPage() {
         assert(Thread.isMainThread)
@@ -71,7 +71,7 @@ final class ImagesListService {
         var request: URLRequest? = URLRequest.makeHTTPRequest(
             path: "/photos/\(photoId)/like",
             httpMethod: isLike ? "POST" : "DELETE",
-            baseURL: Constants.defaultBaseURL
+            baseURL: AuthConfiguration.standard.defaultBaseURL
         )
         
         guard let token = tokenStorage.token else { return }
@@ -121,7 +121,7 @@ extension ImagesListService {
         return URLRequest.makeHTTPRequest(
             path: "/photos",
             httpMethod: "GET",
-            baseURL: Constants.defaultBaseURL,
+            baseURL: AuthConfiguration.standard.defaultBaseURL,
             queryItems: queryItems
         )
     }

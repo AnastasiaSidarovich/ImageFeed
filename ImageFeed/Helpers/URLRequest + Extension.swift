@@ -4,7 +4,7 @@ extension URLRequest {
     static func makeHTTPRequest(
         path: String,
         httpMethod: String,
-        baseURL: URL? = Constants.defaultBaseURL,
+        baseURL: URL? = AuthConfiguration.standard.defaultBaseURL,
         queryItems: [URLQueryItem]? = nil
     ) -> URLRequest? {
         var request: URLRequest
