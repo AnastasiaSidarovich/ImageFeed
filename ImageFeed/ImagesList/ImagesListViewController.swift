@@ -1,11 +1,11 @@
 import UIKit
 import WebKit
 
-final class ImagesListViewController: UIViewController {
+class ImagesListViewController: UIViewController, ImagesListCellDelegate {
     
     // MARK: - IBOutlet
     
-    @IBOutlet private var tableView: UITableView!
+    @IBOutlet var tableView: UITableView!
     
     // MARK: - Private Properties
     
@@ -41,6 +41,7 @@ final class ImagesListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
@@ -53,7 +54,7 @@ final class ImagesListViewController: UIViewController {
             }
     }
     
-    private func updateTableViewAnimated() {
+    func updateTableViewAnimated() {
         guard view != nil else { return }
         let oldCount = photos.count
         let newCount = imagesListService.photos.count
@@ -65,6 +66,27 @@ final class ImagesListViewController: UIViewController {
                 }
                 tableView.insertRows(at: indexPaths, with: .automatic)
             } completion: { _ in }
+        }
+    }
+    
+    func imageListCellDidTapLike(_ cell: ImagesListCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        let photo = photos[indexPath.row]
+        UIBlockingProgressHUD.show()
+        imagesListService.changeLike(photoId: photo.id, isLike: photo.isLiked) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success:
+                DispatchQueue.main.async {
+                    self.photos = self.imagesListService.photos
+                    cell.setIsLiked(self.photos[indexPath.row].isLiked)
+                    UIBlockingProgressHUD.dismiss()
+                }
+            case .failure:
+                DispatchQueue.main.async {
+                    UIBlockingProgressHUD.dismiss()
+                }
+            }
         }
     }
 }
@@ -142,31 +164,6 @@ extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row + 1 == imagesListService.photos.count {
             imagesListService.fetchPhotosNextPage()
-        }
-    }
-}
-
-// MARK: - ImagesListCellDelegate
-
-extension ImagesListViewController: ImagesListCellDelegate {
-    func imageListCellDidTapLike(_ cell: ImagesListCell) {
-        guard let indexPath = tableView.indexPath(for: cell) else { return }
-        let photo = photos[indexPath.row]
-        UIBlockingProgressHUD.show()
-        imagesListService.changeLike(photoId: photo.id, isLike: photo.isLiked) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success:
-                DispatchQueue.main.async {
-                    self.photos = self.imagesListService.photos
-                    cell.setIsLiked(self.photos[indexPath.row].isLiked)
-                    UIBlockingProgressHUD.dismiss()
-                }
-            case .failure:
-                DispatchQueue.main.async {
-                    UIBlockingProgressHUD.dismiss()
-                }
-            }
         }
     }
 }

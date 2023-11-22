@@ -57,8 +57,6 @@ final class ImageFeedUITests: XCTestCase {
             cellToLike.buttons["LikeButtonOn"].tap()
             cellToLike.buttons["LikeButtonOff"].tap()
         }
-        //cellToLike.buttons["LikeButtonOff"].tap()
-        //cellToLike.buttons["LikeButtonOn"].tap()
             
         sleep(2)
             

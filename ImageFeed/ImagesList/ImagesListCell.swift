@@ -4,7 +4,7 @@ protocol ImagesListCellDelegate: AnyObject {
     func imageListCellDidTapLike(_ cell: ImagesListCell)
 }
 
-final class ImagesListCell: UITableViewCell {
+class ImagesListCell: UITableViewCell {
     static let reuseIdentifier = "ImagesListCell"
     weak var delegate: ImagesListCellDelegate?
     
@@ -29,6 +29,18 @@ final class ImagesListCell: UITableViewCell {
         cellImage.contentMode = .center
     }
     
+    func setIsLiked(_ isLiked: Bool) {
+        var likeImage: UIImage?
+        if isLiked == true {
+            likeImage = UIImage(named: "like_button_on")
+            likeButton.accessibilityIdentifier = "LikeButtonOn"
+        } else {
+            likeImage = UIImage(named: "like_button_off")
+            likeButton.accessibilityIdentifier = "LikeButtonOff"
+        }
+        likeButton.setImage(likeImage, for: .normal)
+    }
+    
     @IBAction private func likeAction() {
         delegate?.imageListCellDidTapLike(self)
     }
@@ -46,17 +58,5 @@ extension ImagesListCell {
         cellImage.layer.sublayers?.filter { $0 is CAGradientLayer }.forEach { $0.removeFromSuperlayer() }
                 
         cellImage.layer.addSublayer(gradient)
-    }
-    
-    func setIsLiked(_ isLiked: Bool) {
-        var likeImage: UIImage?
-        if isLiked == true {
-            likeImage = UIImage(named: "like_button_on")
-            likeButton.accessibilityIdentifier = "LikeButtonOn"
-        } else {
-            likeImage = UIImage(named: "like_button_off")
-            likeButton.accessibilityIdentifier = "LikeButtonOff"
-        }
-        likeButton.setImage(likeImage, for: .normal)
     }
 }
