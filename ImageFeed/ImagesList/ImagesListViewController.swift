@@ -1,7 +1,7 @@
 import UIKit
 import WebKit
 
-class ImagesListViewController: UIViewController {
+final class ImagesListViewController: UIViewController {
     
     // MARK: - IBOutlet
     

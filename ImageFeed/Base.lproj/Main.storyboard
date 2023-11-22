@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -32,7 +32,7 @@
         <!--Web View View Controller-->
         <scene sceneID="uNe-32-pth">
             <objects>
-                <viewController id="Psj-Tp-yzg" customClass="WebViewViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WebViewViewController" id="Psj-Tp-yzg" customClass="WebViewViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="l65-YK-HPV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -190,7 +190,7 @@
                                     <action selector="didTapShareButton" destination="NcI-0I-k9d" eventType="touchUpInside" id="vbX-FL-C5G"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xam-5o-YNr" userLabel="Backward Button">
+                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="NavigationBackButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xam-5o-YNr" userLabel="Backward Button">
                                 <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="44" id="8QX-5m-ekQ"/>
@@ -219,6 +219,7 @@
                     <navigationItem key="navigationItem" id="ptl-fP-FdE"/>
                     <size key="freeformSize" width="414" height="896"/>
                     <connections>
+                        <outlet property="backButton" destination="Xam-5o-YNr" id="sxA-dc-cu4"/>
                         <outlet property="imageView" destination="8fi-4G-yMt" id="U3N-4d-If9"/>
                         <outlet property="scrollView" destination="Cs0-BC-XWG" id="6UL-6h-edU"/>
                     </connections>

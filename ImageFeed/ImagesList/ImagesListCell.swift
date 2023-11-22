@@ -49,7 +49,14 @@ extension ImagesListCell {
     }
     
     func setIsLiked(_ isLiked: Bool) {
-        let likeImage = isLiked ? UIImage(named: "like_button_on") : UIImage(named: "like_button_off")
+        var likeImage: UIImage?
+        if isLiked == true {
+            likeImage = UIImage(named: "like_button_on")
+            likeButton.accessibilityIdentifier = "LikeButtonOn"
+        } else {
+            likeImage = UIImage(named: "like_button_off")
+            likeButton.accessibilityIdentifier = "LikeButtonOff"
+        }
         likeButton.setImage(likeImage, for: .normal)
     }
 }
