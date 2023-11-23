@@ -4,7 +4,7 @@ import WebKit
 final class WebViewPresenter: WebViewPresenterProtocol {
     weak var view: WebViewViewControllerProtocol?
     
-    var authHelper: AuthHelperProtocol
+    private var authHelper: AuthHelperProtocol
 
     init(authHelper: AuthHelperProtocol) {
         self.authHelper = authHelper

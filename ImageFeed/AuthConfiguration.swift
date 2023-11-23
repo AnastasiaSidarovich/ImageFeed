@@ -1,12 +1,14 @@
 import Foundation
 
-let AccessKey = "yiTvrZxo7JEqIsUSqpFLEGJ1E241cxayOXcmByF1v_s"
-let SecretKey = "t7uyFsbpcGZhH9PQbnz_bmPvz6KZSztK0hbVw6Q9QcU"
-let RedirectURI = "urn:ietf:wg:oauth:2.0:oob"
-let AccessScope = "public+read_user+write_likes"
-let DefaultBaseURL: URL? = URL(string: "https://api.unsplash.com")
-let BaseURL: URL? = URL(string: "https://unsplash.com")
-let UnsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
+enum ConfigConstants {
+    static let accessKey = "yiTvrZxo7JEqIsUSqpFLEGJ1E241cxayOXcmByF1v_s"
+    static let secretKey = "t7uyFsbpcGZhH9PQbnz_bmPvz6KZSztK0hbVw6Q9QcU"
+    static let redirectURI = "urn:ietf:wg:oauth:2.0:oob"
+    static let accessScope = "public+read_user+write_likes"
+    static let defaultBaseURL: URL? = URL(string: "https://api.unsplash.com")
+    static let baseURL: URL? = URL(string: "https://unsplash.com")
+    static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
+}
 
 struct AuthConfiguration {
     let accessKey: String
@@ -17,7 +19,15 @@ struct AuthConfiguration {
     let authURLString: String
     let baseURL: URL
 
-    init(accessKey: String, secretKey: String, redirectURI: String, accessScope: String, authURLString: String, defaultBaseURL: URL, baseURL: URL) {
+    init(
+        accessKey: String,
+        secretKey: String,
+        redirectURI: String,
+        accessScope: String,
+        authURLString: String,
+        defaultBaseURL: URL,
+        baseURL: URL
+    ) {
         self.accessKey = accessKey
         self.secretKey = secretKey
         self.redirectURI = redirectURI
@@ -28,12 +38,12 @@ struct AuthConfiguration {
     }
 
     static var standard: AuthConfiguration {
-        return AuthConfiguration(accessKey: AccessKey,
-                                 secretKey: SecretKey,
-                                 redirectURI: RedirectURI,
-                                 accessScope: AccessScope,
-                                 authURLString: UnsplashAuthorizeURLString,
-                                 defaultBaseURL: DefaultBaseURL ?? URL(string: "https://api.unsplash.com")!,
-                                 baseURL: BaseURL ?? URL(string: "https://unsplash.com")!)
+        return AuthConfiguration(accessKey: ConfigConstants.accessKey,
+                                 secretKey: ConfigConstants.secretKey,
+                                 redirectURI: ConfigConstants.redirectURI,
+                                 accessScope: ConfigConstants.accessScope,
+                                 authURLString: ConfigConstants.unsplashAuthorizeURLString,
+                                 defaultBaseURL: ConfigConstants.defaultBaseURL ?? URL(string: "https://api.unsplash.com")!,
+                                 baseURL: ConfigConstants.baseURL ?? URL(string: "https://unsplash.com")!)
     }
 }

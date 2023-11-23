@@ -1,19 +1,23 @@
 @testable import ImageFeed
 import XCTest
 
-class ImagesListCellMock: ImagesListCell {
+final class ImagesListCellMock: ImagesListCellProtocol {
+    var delegate: ImageFeed.ImagesListCellDelegate?
     var isLiked: Bool = false
 
-    override func setIsLiked(_ isLiked: Bool) {
+    func setIsLiked(_ isLiked: Bool) {
         self.isLiked = isLiked
     }
 }
 
-class ImagesListViewControllerMock: ImagesListViewController {
+final class ImagesListViewControllerMock: ImagesListViewControllerProtocol {
+    var imagesListService = ImageFeed.ImagesListService.shared
+    var tableView: UITableView!
+    var presenter: ImageFeed.ImagesListCellProtocol?
     var likeCompletionResult: Result<Void, Error>?
     var isUpdateTableViewAnimatedCalled = false
     
-    override func imageListCellDidTapLike(_ cell: ImagesListCell) {
+    func imageListCellDidTapLike(_ cell: ImagesListCellProtocol) {
         guard let cellMock = cell as? ImagesListCellMock else { return }
         cellMock.isLiked.toggle()
         
@@ -26,7 +30,7 @@ class ImagesListViewControllerMock: ImagesListViewController {
         }
     }
     
-    override func updateTableViewAnimated() {
+    func updateTableViewAnimated() {
         isUpdateTableViewAnimatedCalled = true
     }
 }
@@ -37,10 +41,10 @@ final class ImagesListViewControllerTests: XCTestCase {
         let presenter = ImagesListViewControllerMock()
         let tableView = UITableView()
         let cell = ImagesListCellMock()
-        cell.delegate = presenter
+        cell.delegate = presenter as? any ImagesListCellDelegate
                 
         tableView.register(ImagesListCell.self, forCellReuseIdentifier: "ImagesListCell")
-        tableView.dataSource = presenter
+        tableView.dataSource = presenter as? any UITableViewDataSource
         presenter.tableView = tableView
 
         // When
@@ -56,7 +60,7 @@ final class ImagesListViewControllerTests: XCTestCase {
         let tableView = UITableView()
         
         tableView.register(ImagesListCell.self, forCellReuseIdentifier: "ImagesListCell")
-        tableView.dataSource = presenter
+        tableView.dataSource = presenter as? any UITableViewDataSource
         presenter.tableView = tableView
 
         // When

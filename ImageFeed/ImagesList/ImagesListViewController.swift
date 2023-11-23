@@ -1,7 +1,17 @@
 import UIKit
 import WebKit
 
-class ImagesListViewController: UIViewController, ImagesListCellDelegate {
+protocol ImagesListViewControllerProtocol {
+    var presenter: ImagesListCellProtocol? { get set }
+    var imagesListService: ImagesListService { get }
+    var tableView: UITableView! { get }
+    func imageListCellDidTapLike(_ cell: ImagesListCellProtocol)
+    func updateTableViewAnimated()
+}
+
+final class ImagesListViewController: UIViewController, ImagesListCellDelegate & ImagesListViewControllerProtocol {
+    var presenter: ImagesListCellProtocol?
+    let imagesListService = ImagesListService.shared
     
     // MARK: - IBOutlet
     
@@ -10,7 +20,6 @@ class ImagesListViewController: UIViewController, ImagesListCellDelegate {
     // MARK: - Private Properties
     
     private let showSingleImageSegueIdentifier = "showSingleImage"
-    private let imagesListService = ImagesListService.shared
     private var photos: [Photo] = []
     
     private lazy var dateFormatter: DateFormatter = {
@@ -69,21 +78,19 @@ class ImagesListViewController: UIViewController, ImagesListCellDelegate {
         }
     }
     
-    func imageListCellDidTapLike(_ cell: ImagesListCell) {
-        guard let indexPath = tableView.indexPath(for: cell) else { return }
+    func imageListCellDidTapLike(_ cell: ImagesListCellProtocol) {
+        guard let indexPath = tableView.indexPath(for: cell as! UITableViewCell) else { return }
         let photo = photos[indexPath.row]
         UIBlockingProgressHUD.show()
         imagesListService.changeLike(photoId: photo.id, isLike: photo.isLiked) { [weak self] result in
             guard let self = self else { return }
-            switch result {
-            case .success:
-                DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                switch result {
+                case .success:
                     self.photos = self.imagesListService.photos
                     cell.setIsLiked(self.photos[indexPath.row].isLiked)
                     UIBlockingProgressHUD.dismiss()
-                }
-            case .failure:
-                DispatchQueue.main.async {
+                case .failure:
                     UIBlockingProgressHUD.dismiss()
                 }
             }
