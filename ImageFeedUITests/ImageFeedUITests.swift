@@ -27,7 +27,6 @@ final class ImageFeedUITests: XCTestCase {
         
         passwordTextField.tap()
         passwordTextField.typeText("<Ваш пароль>")
-        //app.toolbars["Toolbar"].buttons["Done"].tap()
         sleep(2)
         app.toolbars["Toolbar"].buttons["Done"].tap()
         
