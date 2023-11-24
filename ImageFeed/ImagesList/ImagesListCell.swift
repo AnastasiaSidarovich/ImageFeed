@@ -1,12 +1,24 @@
 import UIKit
 
 protocol ImagesListCellDelegate: AnyObject {
-    func imageListCellDidTapLike(_ cell: ImagesListCell)
+    func imageListCellDidTapLike(_ cell: ImagesListCellProtocol)
 }
 
-final class ImagesListCell: UITableViewCell {
+protocol ImagesListCellProtocol {
+    var delegate: ImagesListCellDelegate? { get set }
+    var isLiked: Bool { get set }
+    func setIsLiked(_ isLiked: Bool)
+}
+
+final class ImagesListCell: UITableViewCell, ImagesListCellProtocol {
     static let reuseIdentifier = "ImagesListCell"
     weak var delegate: ImagesListCellDelegate?
+    
+    var isLiked: Bool = false {
+            didSet {
+                setIsLiked(isLiked)
+            }
+        }
     
     private let gradient = CAGradientLayer()
     private let imagesListService = ImagesListService.shared
@@ -29,6 +41,13 @@ final class ImagesListCell: UITableViewCell {
         cellImage.contentMode = .center
     }
     
+    func setIsLiked(_ isLiked: Bool) {
+        let likeImage = isLiked ? UIImage(named: "like_button_on") : UIImage(named: "like_button_off")
+        let identifier = isLiked ? "LikeButtonOn" : "LikeButtonOff"
+        likeButton.setImage(likeImage, for: .normal)
+        likeButton.accessibilityIdentifier = identifier
+    }
+    
     @IBAction private func likeAction() {
         delegate?.imageListCellDidTapLike(self)
     }
@@ -46,10 +65,5 @@ extension ImagesListCell {
         cellImage.layer.sublayers?.filter { $0 is CAGradientLayer }.forEach { $0.removeFromSuperlayer() }
                 
         cellImage.layer.addSublayer(gradient)
-    }
-    
-    func setIsLiked(_ isLiked: Bool) {
-        let likeImage = isLiked ? UIImage(named: "like_button_on") : UIImage(named: "like_button_off")
-        likeButton.setImage(likeImage, for: .normal)
     }
 }

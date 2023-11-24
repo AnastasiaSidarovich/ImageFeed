@@ -34,7 +34,7 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "12839B5E2AB352F800DCF7A8"
+               BlueprintIdentifier = "127F096F2B0E4A1D00B0746D"
                BuildableName = "ImageFeedTests.xctest"
                BlueprintName = "ImageFeedTests"
                ReferencedContainer = "container:ImageFeed.xcodeproj">
@@ -45,20 +45,9 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "12839B212AA5D79800DCF7A8"
-               BuildableName = "OAuth2ServiceTests.xctest"
-               BlueprintName = "OAuth2ServiceTests"
-               ReferencedContainer = "container:ImageFeed.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "YES"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "12839B6B2AB35E9B00DCF7A8"
-               BuildableName = "ImageFeedTest.xctest"
-               BlueprintName = "ImageFeedTest"
+               BlueprintIdentifier = "127F098D2B0E4DF900B0746D"
+               BuildableName = "ImageFeedUITests.xctest"
+               BlueprintName = "ImageFeedUITests"
                ReferencedContainer = "container:ImageFeed.xcodeproj">
             </BuildableReference>
          </TestableReference>
